@@ -1,5 +1,7 @@
-import { Box } from '@chakra-ui/react';
+import { Box,Heading } from '@chakra-ui/react';
 import React from 'react';
+import { NO_TOPIC_STRING } from '../../classes/ConversationArea';
+import useConversationAreas from '../../hooks/useConversationAreas';
 
 /**
  * Displays a list of "active" conversation areas, along with their occupants 
@@ -25,5 +27,14 @@ import React from 'react';
  * See relevant hooks: useConversationAreas, usePlayersInTown.
  */
 export default function ConversationAreasList(): JSX.Element {
-  return <Box />;
+  const conversationAreas = useConversationAreas();
+  const hasActiveConversationArea = conversationAreas.length > 0 && conversationAreas.find(c=>(c.topic === NO_TOPIC_STRING)) === undefined;
+
+  return <Box>
+    {!hasActiveConversationArea ? <Heading fontSize='xl' as='h2'>No active conversation areas</Heading> : 'has'} 
+
+  </Box>
+    
+
+
 }
